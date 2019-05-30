@@ -6,7 +6,7 @@
     <body>
         <script>
         
-        //randomly returns Rock, Paper or Scissors.
+        //Get the computer's random choice.
         function computerPlay(){ 
             let random123 = Math.floor((Math.random()*3) + 1) //pick a random number between 1 and 3.
             switch (random123){
@@ -16,17 +16,51 @@
             }
         }
 
-        //This function e.g. returns "Rock" if input is "rock" or "RoCk" or "ROCK" etc.
+        //This function makes the player's choice case insensitive, e.g. returns "Rock" if input is "rock" or "RoCks" or " ROCK" etc.
         function getNormalized(input){
-            if (input.search(/rock/i)==0) return "Rock";
-            if (input.search(/paper/i)==0) return "Paper";
-            if (input.search(/scissors/i)==0) return "Scissors";
+            if (input.search(/rock/i)!=-1) return "Rock";
+            if (input.search(/paper/i)!=-1) return "Paper";
+            if (input.search(/scissors/i)!=-1) return "Scissors";
             return "Invalid";
         }      
 
-        function playARound(playerSelection,computerSelection){
+        function playRound(playerSelection,computerSelection){
             playerSelection = getNormalized(playerSelection);
+            if (playerSelection == "Invalid") return "You made an invalid choice, dummy. Please select Rock, Paper, or Scissors.";
+            //Check for draw
+            if (playerSelection == computerSelection){
+                return "It's a draw! You both picked " + playerSelection + ".";
+            }
+            //If not a draw, check whether the player wins or loses.
+            switch (playerSelection){
+                case "Rock":
+                    if (computerSelection == "Paper"){
+                        return "You lose! " + computerSelection + " beats " + playerSelection + ".";
+                    } else return "You win! " + playerSelection + " beats " + computerSelection + ".";
+                
+                case "Paper":
+                    if (computerSelection == "Scissors"){
+                        return "You lose! " + computerSelection + " beats " + playerSelection + ".";
+                    } else return "You win! " + playerSelection + " beats " + computerSelection + ".";
+                
+                case "Scissors":
+                    if (computerSelection == "Rock"){
+                        return "You lose! " + computerSelection + " beats " + playerSelection + ".";
+                    } else return "You win! " + playerSelection + " beats " + computerSelection + ".";
+            }                
         }
+
+        function game(){
+            const numberOfRounds = 5;
+            let currentRound = 1;
+
+            while (currentRound <= numberOfRounds){
+                playerChoice = prompt("Make your choice: ");
+                console.log("Round " + currentRound + ": " + playRound(playerChoice,computerPlay()));
+                currentRound++;
+            }
+        }
+        game(); 
         </script>
     </body>
 </html>
