@@ -1,0 +1,37 @@
+body{
+    font-family: sans-serif;
+}
+
+h1, h2{
+    text-align: center;
+    padding-top: 30px;
+}
+
+#container{
+    text-align: center;
+}
+
+#your-panel, #computer-panel{
+    display: inline-block;
+    text-align: center;
+
+    padding: 50px;
+    background-color: rgb(239, 233, 233);
+}
+
+img{
+    width: 150px;
+    transition-duration: 0.3s;
+}
+
+.pulse{
+    
+}
+
+.grayed{
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%); 
+}
