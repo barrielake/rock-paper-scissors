@@ -1,3 +1,5 @@
+const numberOfRounds = 5;
+
 let choices = document.querySelectorAll(".choice");
 choices.forEach(image => image.addEventListener("click", beginRound));
 
@@ -5,24 +7,10 @@ let computerChoices = document.querySelectorAll(".computer-choice");
 
 function highlightChoice(selected, choicelist){
     choicelist.forEach(function(choice){
-        if (choice.id == selected){
-            choice.classList.add("pulse");
+        if (choice.id == selected) {
             choice.classList.remove("grayed");
-        } else {
-            choice.classList.add("grayed");
-            choice.classList.remove("pulse");
-        }
+        } else choice.classList.add("grayed");
     });
-}
-
-function beginRound(){
-    highlightChoice("none", choices);
-    highlightChoice("none", computerChoices);
-    let playerSelection = this.id; //id of image selected will be "Rock", "Paper", or "Scissors"
-    let computerSelection = getComputerChoice();
-    highlightChoice(playerSelection, choices);
-    highlightChoice(computerSelection, computerChoices);
-    console.log(playerSelection + "v" + computerSelection + "=" + playRound(playerSelection,computerSelection));
 }
 
 function getComputerChoice(){ 
@@ -34,68 +22,47 @@ function getComputerChoice(){
     }
 }
 
-function playRound(playerSelection,computerSelection){
-    if (playerSelection == "Invalid") return "invalid";
-        
-    if (playerSelection == computerSelection){
-        return "draw";
-    }
+function beginRound(){
+    highlightChoice("none", choices);
+    highlightChoice("none", computerChoices);
+    let playerSelection = this.id; //id of image selected will be "Rock", "Paper", or "Scissors"
+    let computerSelection = getComputerChoice();
+    highlightChoice(playerSelection, choices);
+    highlightChoice(computerSelection, computerChoices);
     
+    updateGame(playerSelection,computerSelection);
+}
+
+let message = document.querySelector("#message");
+
+function updateGame(playerSelection,computerSelection){
+    let result = play(playerSelection,computerSelection);    
+    
+    switch(result){
+        case "draw":
+            message.textContent = `It's a draw! You both picked ${playerSelection}.`;
+            break;
+        case "win":
+            message.textContent = `You win! ${playerSelection} beats ${computerSelection}.`
+            break;
+        case "lose":
+            message.textContent = `You lose! ${computerSelection} beats ${playerSelection}.`
+            break;
+    }
+}
+
+function play(playerSelection,computerSelection){
+    if (playerSelection == computerSelection) return "draw";    
     switch (playerSelection){
         case "Rock":
-            if (computerSelection == "Scissors"){
-                return "win";
-            } else return "lose";
-        
+            if (computerSelection == "Scissors") return "win"; 
+            return "lose";
         case "Paper":
-            if (computerSelection == "Rock"){
-                return "win";
-            } else return "lose";
-        
+            if (computerSelection == "Rock") return "win"; 
+            return "lose";
         case "Scissors":
-            if (computerSelection == "Paper"){
-                return "win";
-            } else return "lose";
-    }                
-}
-
-//helper function for game()
-function printScore(playerScore,computerScore){
-    return "SCORE - You: " + playerScore + " / Computer: " + computerScore;
-}
-
-function game(){
-    const numberOfRounds = 5;
-    let currentRound = 1;
-    let playerScore = 0;
-    let computerScore = 0;
-
-    while (currentRound <= numberOfRounds){
-        
-        playerSelection = getNormalized(prompt("Rock! Paper! Scissors! Enter your choice: "));
-        computerSelection = getComputerChoice();
-
-        switch (playRound(playerSelection, computerSelection)){
-            
-            case "win":
-                playerScore++;
-                console.log("You win! " + playerSelection + " beats " + computerSelection + ". " + printScore(playerScore,computerScore));
-                currentRound++;
-                break;
-            
-            case "lose":
-                computerScore++;
-                console.log("You lose! " + computerSelection + " beats " + playerSelection + ". " + printScore(playerScore,computerScore));
-                currentRound++;
-                break;
-
-            case "draw": //Note: Draws don't increase the score or advance the round.
-                console.log("It's a draw! You both picked " + playerSelection + ". Play again.")
-                break;
-        }
+            if (computerSelection == "Paper") return "win"; 
+            return "lose";
     }
-    if (playerScore > computerScore){
-        console.log("You won the game!");
-    } else console.log("You lost the game!"); //No chance of a draw for round of 5 (or any odd number)
 }
-//game(); //Play the game. */
+

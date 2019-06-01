@@ -14,14 +14,17 @@ h1, h2{
 #your-panel, #computer-panel{
     display: inline-block;
     text-align: center;
-
-    padding: 50px;
+    margin: 0px 25px 0px 25px;
+    padding: 20px 50px 50px 50px;
+    border-radius: 25px;
     background-color: rgb(239, 233, 233);
 }
 
 img{
     width: 150px;
     transition-duration: 0.3s;
+    border-radius: 15px;
+    margin: 5px;
 }
 
 .pulse{
