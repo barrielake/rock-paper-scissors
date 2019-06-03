@@ -1,9 +1,23 @@
 const numberOfRounds = 5;
-
-let choices = document.querySelectorAll(".choice");
-choices.forEach(image => image.addEventListener("click", beginRound));
+let currentRound = 1;
+let playerScore = 0;
+let computerScore = 0;
 
 let computerChoices = document.querySelectorAll(".computer-choice");
+let playerChoices = document.querySelectorAll(".choice");
+
+playerChoices.forEach(image => image.addEventListener("click", beginRound));
+
+function beginRound(){
+    highlightChoice("none", playerChoices);
+    highlightChoice("none", computerChoices);
+    let playerSelection = this.id; //id of image selected will be "Rock", "Paper", or "Scissors"
+    let computerSelection = getComputerChoice();
+    highlightChoice(playerSelection, playerChoices);
+    highlightChoice(computerSelection, computerChoices);
+    
+    updateGame(playerSelection,computerSelection);
+}
 
 function highlightChoice(selected, choicelist){
     choicelist.forEach(function(choice){
@@ -22,18 +36,10 @@ function getComputerChoice(){
     }
 }
 
-function beginRound(){
-    highlightChoice("none", choices);
-    highlightChoice("none", computerChoices);
-    let playerSelection = this.id; //id of image selected will be "Rock", "Paper", or "Scissors"
-    let computerSelection = getComputerChoice();
-    highlightChoice(playerSelection, choices);
-    highlightChoice(computerSelection, computerChoices);
-    
-    updateGame(playerSelection,computerSelection);
-}
-
 let message = document.querySelector("#message");
+let roundDisplay = document.querySelector("#current-round");
+let scoreDisplay = document.querySelector("#your-score");
+let computerScoreDisplay = document.querySelector("#computer-score");
 
 function updateGame(playerSelection,computerSelection){
     let result = play(playerSelection,computerSelection);    
@@ -43,10 +49,18 @@ function updateGame(playerSelection,computerSelection){
             message.textContent = `It's a draw! You both picked ${playerSelection}.`;
             break;
         case "win":
-            message.textContent = `You win! ${playerSelection} beats ${computerSelection}.`
+            message.textContent = `You win! ${playerSelection} beats ${computerSelection}.`;
+            playerScore++;
+            currentRound++;
+            scoreDisplay.textContent = `Score: ${playerScore}`;
+            roundDisplay.textContent = `Round ${currentRound} of ${numberOfRounds}`;
             break;
         case "lose":
-            message.textContent = `You lose! ${computerSelection} beats ${playerSelection}.`
+            message.textContent = `You lose! ${computerSelection} beats ${playerSelection}.`;
+            computerScore++;
+            currentRound++;
+            computerScoreDisplay.textContent = `Score: ${computerScore}`;
+            roundDisplay.textContent = `Round ${currentRound} of ${numberOfRounds}`;
             break;
     }
 }

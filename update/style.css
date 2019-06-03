@@ -7,6 +7,16 @@ h1, h2{
     padding-top: 30px;
 }
 
+h3 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+p { 
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
 #container{
     text-align: center;
 }
@@ -27,14 +37,14 @@ img{
     margin: 5px;
 }
 
-.pulse{
-    
-}
-
 .grayed{
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
     -o-filter: grayscale(100%);
     -ms-filter: grayscale(100%);
     filter: grayscale(100%); 
+}
+
+#message{
+    text-align: center;
 }

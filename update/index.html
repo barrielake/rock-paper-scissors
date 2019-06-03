@@ -7,14 +7,16 @@
     <body>
         <h1>Rock! Paper! Scissors!</h1>
 
-        <div id="currentRound">
-            <h2>Round 1 of 5</h2>
+        <div>
+            <h2 id="current-round">Round 1 of 5</h2>
+            <h3 id="message">Pick your weapon</h3>
         </div>
         
         <div id="container">
 
             <div id="your-panel">
-                <p class="score" id="your-score">Score: </p>
+                <h3>YOU</h3>
+                <p class="score" id="your-score">Score: 0</p>
                 <div id="choices">
                     <img class="choice" id="Rock" src="images/rock.png">
                     <img class="choice" id="Paper" src="images/paper.png">
@@ -23,15 +25,14 @@
             </div>
             
             <div id="computer-panel">
-                <p class="score" id="computer-score">Score: </p>
+                <h3>COMPUTER</h3>
+                <p class="score" id="computer-score">Score: 0</p>
                 <div id="choices">
                     <img class="computer-choice" id="Rock" src="images/rock.png">
                     <img class="computer-choice" id="Paper" src="images/paper.png">
                     <img class="computer-choice" id="Scissors" src="images/scissors.png">
                 </div>
             </div>
-            
-            <h3 id="message">Pick your weapon</h3>
 
         </div>        
     </body>
