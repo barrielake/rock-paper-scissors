@@ -3,92 +3,21 @@
     <head>
         <title>Rock, Paper, Scissors!</title>
     </head>
+    
     <body>
-        <script>
         
-        //Get the computer's random choice.
-        function computerPlay(){ 
-            let random123 = Math.floor((Math.random()*3) + 1) //pick a random number between 1 and 3.
-            switch (random123){
-                case 1: return "Rock";
-                case 2: return "Paper";
-                case 3: return "Scissors";
-            }
-        }
+        <div id="player-choices">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
 
-        //This function makes the player's choice into Sentence Case, e.g. returns "Rock" if input is "rock" or "RoCks" or " ROCK" etc.
-        function getNormalized(input){
-            if (input.search(/rock/i)!=-1) return "Rock";
-            if (input.search(/paper/i)!=-1) return "Paper";
-            if (input.search(/scissors/i)!=-1) return "Scissors";
-            return "Invalid";
-        }      
+        <div id="result">Pick your weapon.</div>
 
-        function playRound(playerSelection,computerSelection){
-            if (playerSelection == "Invalid") return "invalid";
-            //Check for draw
-            if (playerSelection == computerSelection){
-                return "draw";
-            }
-            //If not a draw, check whether the player wins or loses.
-            switch (playerSelection){
-                case "Rock":
-                    if (computerSelection == "Scissors"){
-                        return "win";
-                    } else return "lose";
-                
-                case "Paper":
-                    if (computerSelection == "Rock"){
-                        return "win";
-                    } else return "lose";
-                
-                case "Scissors":
-                    if (computerSelection == "Paper"){
-                        return "win";
-                    } else return "lose";
-            }                
-        }
-        
-        //helper function for game()
-        function printScore(playerScore,computerScore){
-            return "SCORE - You: " + playerScore + " / Computer: " + computerScore;
-        }
+        <div id="score">Score:  YOU: 0  COMPUTER: 0</div>
 
-        function game(){
-            const numberOfRounds = 5;
-            let currentRound = 1;
-            let playerScore = 0;
-            let computerScore = 0;
-
-            while (currentRound <= numberOfRounds){
-                
-                playerSelection = getNormalized(prompt("Rock! Paper! Scissors! Enter your choice: "));
-                computerSelection = computerPlay();
-
-                switch (playRound(playerSelection, computerSelection)){
-                    
-                    case "win":
-                        playerScore++;
-                        console.log("You win! " + playerSelection + " beats " + computerSelection + ". " + printScore(playerScore,computerScore));
-                        currentRound++;
-                        break;
-                    
-                    case "lose":
-                        computerScore++;
-                        console.log("You lose! " + computerSelection + " beats " + playerSelection + ". " + printScore(playerScore,computerScore));
-                        currentRound++;
-                        break;
-
-                    case "draw": //Note: Draws don't increase the score or advance the round.
-                        console.log("It's a draw! You both picked " + playerSelection + ". Play again.")
-                        break;
-                }
-            }
-            if (playerScore > computerScore){
-                console.log("You won the game!");
-            } else console.log("You lost the game!"); //No chance of a draw for round of 5 (or any odd number)
-        }
-        game(); //Play the game. 
-        </script>
     </body>
+
+    <script type="text/javascript" src="script.js"></script>
+
 </html>
