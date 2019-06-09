@@ -87,13 +87,12 @@ function endGame(finalResult){
     if (finalResult === "player wins"){
         finalResultDisplay.textContent = "You won the game!"; 
     } else finalResultDisplay.textContent = "You lost the game!";
-    //prevent user from making more plays after the game is over
-    rockButton.setAttribute("disabled", "true");
-    paperButton.setAttribute("disabled", "true");
-    scissorsButton.setAttribute("disabled", "true");
+    
+    setWeaponButtonsTo("disabled"); //prevent user from making more plays after the game is over
+    
     //add a reset button to the page
     let resetButton = document.createElement("button");
-    resetButton.textContent = "Play again?";
+    resetButton.textContent = "Play again";
     resetButton.addEventListener("click", () => resetGame());
     finalResultDisplay.appendChild(resetButton);
 }
@@ -101,12 +100,23 @@ function endGame(finalResult){
 function resetGame(){
     playerScore = 0
     computerScore = 0;
-    resultDisplay.textContent = "Pick your weapon.";
+    resultDisplay.textContent = "Pick your weapon. First to 5 wins!";
     ScoreDisplay.textContent = "Score:  YOU: 0  COMPUTER: 0";
     finalResultDisplay.textContent = "";
-    rockButton.removeAttribute("disabled");
-    paperButton.removeAttribute("disabled");
-    scissorsButton.removeAttribute("disabled");
+    setWeaponButtonsTo("enabled");
+}
+
+function setWeaponButtonsTo(status){
+    let buttons = [rockButton,paperButton,scissorsButton];
+    buttons.forEach((button) => {
+        if (status == "disabled"){
+            button.setAttribute("disabled", "true");
+            button.classList.add("faded"); //This makes it clearer that the button is disabled
+        } else {
+            button.removeAttribute("disabled");
+            button.classList.remove("faded");
+        }
+    });
 }
 
 

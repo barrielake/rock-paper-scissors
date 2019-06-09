@@ -1,15 +1,21 @@
 <!DOCTYPE = html>
 <html>
-    <head>
-        <title>Rock, Paper, Scissors!</title>
-    </head>
+
+<head>
+    <title>Rock, Paper, Scissors!</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+</head>
     
-    <body>
-        
+<body>
+
+    <div id="container">
+        <h1>Rock! Paper! Scissors!</h1> 
+
         <div id="player-choices">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
+            <button id="rock"><img src="images/rock.png"></button>
+            <button id="paper"><img src="images/paper.png"></button>
+            <button id="scissors"><img src="images/scissors.png"></button>
         </div>
 
         <div id="result">Pick your weapon. First to 5 wins!</div>
@@ -17,9 +23,10 @@
         <div id="score"></div>
 
         <div id="final-result"></div>
+    </div>  
 
-    </body>
+</body>
 
-    <script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="script.js"></script>
 
 </html>

@@ -1,0 +1,33 @@
+#container{
+    text-align: center;
+    font-family: Ubuntu;
+    margin: 50px 400px;
+    background-color: rgb(54, 60, 59);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+img{
+    width: 100px;
+    padding: 5px 0;
+    border-radius: 10px;
+}
+
+button {
+    border-radius: 10px;
+}
+
+#player-choices button{
+    margin: 3px;
+}
+
+.faded {
+    opacity: 0.4;
+}
+
+div {
+    padding: 5px;
+}
+
+
