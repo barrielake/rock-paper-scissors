@@ -1,9 +1,10 @@
 let playerScore = 0;
 let computerScore = 0;
-const maxScore = 5;
+const winningScore = 5;
 
 const resultDisplay = document.querySelector("#result");
 const ScoreDisplay = document.querySelector("#score");
+const finalResultDisplay = document.querySelector("#final-result");
 
 const rockButton = document.querySelector("#rock");
 const paperButton = document.querySelector("#paper");
@@ -26,10 +27,11 @@ function computerPlay(){
 function playRound(playerSelection,computerSelection){
     //Check for draw
     if (playerSelection == computerSelection){
-        printResult("draw",playerSelection,computerSelection);
+        printResult("draw",playerSelection,computerSelection); 
         return;
     }
     //If not a draw, check whether the player wins or loses.
+    let result = "";
     switch (playerSelection){
         case "Rock":
             if (computerSelection == "Scissors"){
@@ -48,11 +50,15 @@ function playRound(playerSelection,computerSelection){
                 result = "win";
             } else result = "lose";
             break;
-    }
-    
+    }    
     printResult(result, playerSelection, computerSelection);
+    updateScore(result); //increments and prints updated scores
 
-    updateScore(result);
+    if (playerScore === winningScore){
+        endGame("player wins")
+    } else if (computerScore === winningScore){
+        endGame("computer wins");
+    }
 }
 
 function printResult(result,playerSelection,computerSelection){
@@ -75,25 +81,32 @@ function updateScore(result){
     } else computerScore++; 
 
     ScoreDisplay.textContent = `Score:  YOU: ${playerScore} COMPUTER: ${computerScore}`;
-    
-    if (playerScore == maxScore){
-        endGame("player wins")
-    } else if (computerScore == maxScore){
-        endGame("computer wins");
-    }
 }
 
 function endGame(finalResult){
-    //reset scores
+    if (finalResult === "player wins"){
+        finalResultDisplay.textContent = "You won the game!"; 
+    } else finalResultDisplay.textContent = "You lost the game!";
+    //prevent user from making more plays after the game is over
+    rockButton.setAttribute("disabled", "true");
+    paperButton.setAttribute("disabled", "true");
+    scissorsButton.setAttribute("disabled", "true");
+    //add a reset button to the page
+    let resetButton = document.createElement("button");
+    resetButton.textContent = "Play again?";
+    resetButton.addEventListener("click", () => resetGame());
+    finalResultDisplay.appendChild(resetButton);
+}
+
+function resetGame(){
     playerScore = 0
     computerScore = 0;
-    //announce winner
-    if (finalResult === "player wins"){
-        setTimeout(function(){alert("You won the game!")},1); 
-    } else setTimeout(function(){alert("You won the game!")},1);
-    //reset result and score displays
     resultDisplay.textContent = "Pick your weapon.";
     ScoreDisplay.textContent = "Score:  YOU: 0  COMPUTER: 0";
+    finalResultDisplay.textContent = "";
+    rockButton.removeAttribute("disabled");
+    paperButton.removeAttribute("disabled");
+    scissorsButton.removeAttribute("disabled");
 }
 
 
